@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test  # H2 메모리 데이터베이스 사용
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true  # H2 콘솔 사용을 위한 설정
+  jpa:
+    hibernate:
+      ddl-auto: update  # 애플리케이션 실행 시 스키마 자동 업데이트
+    show-sql: true
