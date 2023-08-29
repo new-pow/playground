@@ -14,12 +14,13 @@ public class Stack<E> implements Cloneable{
     }
 
     public Stack(int capacity) {
-        this.top = 0;
+        this.top = -1;
         this.capacity = capacity;
         this.datas = (E[]) new Object[capacity];
     }
 
     public void push(E data) {
+        top ++;
         this.datas[top] = data;
         if (top >= capacity) {
             throw new StackOverflowError();
