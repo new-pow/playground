@@ -2,7 +2,8 @@ spring:
   jpa:
     show-sql: true
     generate-ddl: true
+
   datasource:
-    url: jdbc:mysql://localhost:3306/playground-db
+    url: jdbc:mysql://localhost:3306/playground
     username: root
     password: 1122

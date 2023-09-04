@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -87,8 +89,17 @@ class MemberTest {
 
     @Test
     void elementalCollectionTest() throws Exception{
-        Coordinates coordinates = new ConnectedLocation(500, 500);
-        member.addLocationHistory(coordinates);
+        ConnectedLocation coordinates = new ConnectedLocation(500, 500);
+        List<ConnectedLocation> newList = new ArrayList<>(); // 빈 리스트 생성
+
+        // newList에 기존 요소를 추가
+        newList.addAll(member.getConnectedLocations().stream()
+                .map(ConnectedLocation::clone).toList());
+
+        newList.add(coordinates.clone()); // 새 요소 추가
+        member.updateConnectedHistory(newList);
+
+        em.flush();
 
         assertThat(member.getConnectedLocations()).hasSize(2);
     }

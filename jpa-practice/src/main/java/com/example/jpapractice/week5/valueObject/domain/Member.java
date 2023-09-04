@@ -27,18 +27,23 @@ public class Member {
 //            ,joinColumns = @JoinColumn(name = "id")
 //            ,foreignKey = @ForeignKey(name = "member_id")
     )
-    private List<Coordinates> connectedLocations = new ArrayList<>();
+    private List<ConnectedLocation> connectedLocations = new ArrayList<>();
 
     @Builder
-    public Member(Long id, String name, Coordinates connectedLocation, List<Coordinates> connectedHistory) {
+    public Member(Long id, String name, Coordinates connectedLocation, List<ConnectedLocation> connectedHistory) {
         this.id = id;
         this.name = name;
         this.connectedLocation = connectedLocation;
         this.connectedLocations = connectedHistory;
     }
 
-    public void addLocationHistory(Coordinates coordinates) {
+    public void addLocationHistory(ConnectedLocation coordinates) {
         this.connectedLocation = coordinates;
-        this.connectedLocations.add(coordinates);
+        List<ConnectedLocation> newList = List.of(coordinates);
+        this.connectedLocations = newList;
+    }
+
+    public void updateConnectedHistory(List<ConnectedLocation> connectedLocations) {
+        this.connectedLocations = connectedLocations;
     }
 }
