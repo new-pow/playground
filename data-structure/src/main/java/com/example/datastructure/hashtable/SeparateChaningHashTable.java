@@ -30,16 +30,20 @@ public class SeparateChaningHashTable<K, V> implements HashTable{
 
     private void resize() {
         int oldLength = this.tables.length;
-        LinkedList[] linkedLists = new LinkedList[oldLength * 2];
+        LinkedList[] newList = new LinkedList[oldLength * 2];
 
-        for (int i = 0; i< linkedLists.length; i ++) {
-            if (i < oldLength) {
-                linkedLists[i] = this.tables[i];
-            } else {
-                linkedLists[i] = new LinkedList<>();
+        for (int i = 0; i < oldLength; i++) {
+            LinkedList<Entry<K, V>> oldList = this.tables[i];
+            for (Entry<K, V> entry : oldList) {
+                int newIndex = entry.getKey().hashCode() % newList.length;
+                if (newList[newIndex] == null) {
+                    newList[newIndex] = new LinkedList<>();
+                }
+                newList[newIndex].add(entry);
             }
         }
-        this.tables = linkedLists;
+
+        this.tables = newList;
     }
 
     private boolean isResizingRequired() {
@@ -48,7 +52,7 @@ public class SeparateChaningHashTable<K, V> implements HashTable{
 
     @Override
     public void remove(Object key) {
-        tables[hashCode(key)].remove(key);
+        tables[hashCode(key)].removeIf(entry -> entry.getKey().equals(key));
         numberOfItems --;
     }
 
