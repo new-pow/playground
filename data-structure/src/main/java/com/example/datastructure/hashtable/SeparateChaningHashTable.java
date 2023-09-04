@@ -1,7 +1,6 @@
 package com.example.datastructure.hashtable;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class SeparateChaningHashTable<K, V> implements HashTable{
 

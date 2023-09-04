@@ -13,7 +13,7 @@ public class LinearProbingHashTable<K, V> implements HashTable {
     private int numberOfItems;
 
     public LinearProbingHashTable(int capacity) {
-        this.tables = new Entry<>[capacity];
+        this.tables = new Entry[capacity];
         this.numberOfItems = 0;
     }
 
@@ -23,31 +23,23 @@ public class LinearProbingHashTable<K, V> implements HashTable {
             resize();
         }
 
-        Entry<K, V> objectEntry = new Entry<>((K)key, (V)value);
+        Entry<K, V> objectEntry = new Entry<>((K) key, (V) value);
         int index = hashCode((K) key);
-        boolean work = false;
 
-        for (int i=0; i<tables.length; i++) {
-            if (tables[index] == null) {
-                tables[hashCode((K) key)] = objectEntry;
-                work = true;
-                break;
-            } else {
-                index = (index + 1) % tables.length;
-            }
+        while (tables[index] != null) {
+            index = (index + 1) % tables.length;
         }
-        if (!work) {
-            throw new RuntimeException();
-        }
-        numberOfItems ++;
+
+        tables[index] = objectEntry;
+        numberOfItems++;
     }
 
     private void resize() {
         int oldLength = this.tables.length;
-        Entry<K,V>[] newList = new Entry<>[oldLength * 2];
+        Entry<K,V>[] newList = new Entry[oldLength * 2];
 
         for (int i = 0; i< tables.length; i ++) {
-            if (i < oldLength) {
+            if (i < oldLength && tables[i] != null) {
                 newList[hashCode(tables[i].getKey())] = this.tables[i];
             }
         }
@@ -66,6 +58,7 @@ public class LinearProbingHashTable<K, V> implements HashTable {
             if (tables[index].getKey().equals(key)) {
                 tables[index] = null;
                 numberOfItems --;
+                return;
             }
             index = (index+1)% tables.length;
         }
@@ -77,7 +70,7 @@ public class LinearProbingHashTable<K, V> implements HashTable {
 
         for (int i=0; i<tables.length; i++) {
             if (tables[index] != null && tables[index].getKey().equals(key)) {
-                return tables[index];
+                return tables[index].getValue();
             }
             index = (index+1)% tables.length;
         }
@@ -92,12 +85,12 @@ public class LinearProbingHashTable<K, V> implements HashTable {
 
     @Override
     public Collection keys() {
-        return Arrays.stream(tables).map(Entry::getKey).collect(Collectors.toList());
+        return Arrays.stream(tables).filter(Objects::nonNull).map(Entry::getKey).collect(Collectors.toList());
     }
 
     @Override
     public Collection values() {
-        return Arrays.stream(tables).map(Entry::getValue).collect(Collectors.toList());
+        return Arrays.stream(tables).filter(Objects::nonNull).map(Entry::getValue).collect(Collectors.toList());
     }
 
     @Override
