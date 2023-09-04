@@ -98,7 +98,18 @@ public class LinearProbingHashTable<K, V> implements HashTable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LinearProbingHashTable<?, ?> that = (LinearProbingHashTable<?, ?>) o;
-        return numberOfItems == that.numberOfItems && Arrays.equals(tables, that.tables);
+        if (numberOfItems != that.numberOfItems) return false;
+
+        // 배열 내의 엔트리 객체에 대한 비교를 추가
+        for (int i = 0; i < tables.length; i++) {
+            Entry<K, V> thisEntry = tables[i];
+            Entry<?, ?> thatEntry = that.tables[i];
+            if (thisEntry != null && !thisEntry.equals(thatEntry)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public int hashCode(K key) {
