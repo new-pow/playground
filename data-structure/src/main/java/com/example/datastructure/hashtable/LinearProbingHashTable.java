@@ -30,6 +30,8 @@ public class LinearProbingHashTable<K, V> implements HashTable {
             index = (index + 1) % tables.length;
         }
 
+        // 같은 Key가 있는지도 확인해야 합니다..
+
         tables[index] = objectEntry;
         numberOfItems++;
     }
