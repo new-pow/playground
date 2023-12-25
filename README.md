@@ -7,4 +7,5 @@
 |-------|-------|
 | data-structure | 자료구조 직접 구현해보기 |
 | jpa-* | Spring data JPA의 예제 만들어보기 |
+| kotlin-*tutorial | Kotlin tutorial 따라해보기 |
 | 그 외 | 연습 프로젝트 |
