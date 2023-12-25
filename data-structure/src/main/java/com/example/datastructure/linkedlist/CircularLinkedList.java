@@ -99,7 +99,7 @@ public class CircularLinkedList<T> implements LinkedList<T> {
             return;
         }
 
-        SingleNode<T> before = this.prev;
+        SingleNode<T> before = this.tail;
         while (before.next.next != null) {
             before = before.next;
         }
@@ -113,7 +113,7 @@ public class CircularLinkedList<T> implements LinkedList<T> {
         if (isEmpty()) throw new IllegalArgumentException();
         if (index >= size || index < 0) throw new IndexOutOfBoundsException();
 
-        SingleNode<T> before = this.prev;
+        SingleNode<T> before = this.tail;
         SingleNode<T> temp = this.head;
         int count = 0;
         while (count!=index) {
