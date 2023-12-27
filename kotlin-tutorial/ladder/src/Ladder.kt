@@ -16,15 +16,18 @@ data class Ladder(val layer: Int, val playerNumber: Int) {
                 if (j % 2 == 0) {
                     ladder[i][j] = '|'
                 } else {
-                    val random = Random.nextBoolean()
-                    if (random) {
-                        ladder[i][j] = '-'
-                    } else {
-                        ladder[i][j] = ' '
-                    }
+                    ladder[i][j] = generateStep()
                 }
             }
         }
+    }
+
+    fun generateStep() : Char {
+        val random = Random.nextBoolean()
+        if (random) {
+            return '-'
+        }
+        return ' '
     }
 
     fun printLadder() {
