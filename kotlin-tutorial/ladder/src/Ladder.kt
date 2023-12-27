@@ -12,6 +12,7 @@ data class Ladder(val layer: Int, val playerNumber: Int) {
     // ladder 초기화
     init {
         for (i in 0 until layer) { // until은 마지막을 포함하지 않는다.
+            // TODO : depth 1로 줄여보기
             for (j in 0 until playerNumber*2 + 1) {
                 if (j % 2 == 0) {
                     ladder[i][j] = '|'
@@ -31,6 +32,7 @@ data class Ladder(val layer: Int, val playerNumber: Int) {
     }
 
     fun printLadder() {
+        //TODO : depth 1로 줄여보기
         for (i in 0 until layer) {
             for (j in 0 until playerNumber*2 + 1) {
                 print(ladder[i][j])
