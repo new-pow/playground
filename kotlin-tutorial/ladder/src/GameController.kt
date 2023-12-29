@@ -1,6 +1,7 @@
 package src
 
-import src.*
+import src.domain.*
+import src.view.UserInterface
 
 fun main() {
     // 1단계 : 유저 입력 받기

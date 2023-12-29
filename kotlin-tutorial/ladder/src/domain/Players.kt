@@ -1,4 +1,4 @@
-package src
+package src.domain
 
 data class Players(val players: List<Player>) {
 

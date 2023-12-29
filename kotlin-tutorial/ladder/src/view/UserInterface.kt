@@ -1,4 +1,6 @@
-package src
+package src.view
+
+import src.domain.*
 
 class UserInterface {
 
