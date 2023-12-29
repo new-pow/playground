@@ -16,7 +16,18 @@
 | |-|-|-|-|
 ```
 
+- [x] 사다리 플레이어 이름을 입력 받을 수 있도록 한다. (최대 5글자, `,`로 구분)
+- [x] 사다리를 출력할 때 플레이어 이름도 같이 출력한다.
+- [x] 사다리를 출력할 때 사다리 폭도 넓어진다.
+- [x] 사다리 라인이 겹치지 않도록 한다.
+
 ### 궁금한 것
+#### 2단계
+- [x] 코틀린에서 Collection을 어떻게 사용하지?
+    - [x] [참고링크](https://kotlinlang.org/docs/collections-overview.html)
+    - ![](https://kotlinlang.org/docs/images/collections-diagram.png)
+
+
 #### 1단계
 - [x] 패키지 단위로 build를 어떻게 하지?
 ```text
@@ -31,3 +42,9 @@ fun main() {
     println(input) // 입력을 출력한다.
 }
 ```
+
+- [x] 왜 fun 에서 파라미터에 `val`나 `var`를 붙이면 에러가 나지?
+    - `val`과 `var`는 변수 선언 시에만 사용할 수 있다. 함수의 파라미터는 함수 내부에서만 사용하는 불변 변수이기 때문에 `val`과 `var`를 붙일 수 없다.
+    - [참고링크](https://stackoverflow.com/questions/68822461/why-is-var-or-val-not-allowed-in-a-functions-parameter-in-kotlin)
+      - The main reason is that this was confusing: people tend to think that this means passing a parameter by reference, which we do not support (it is costly at runtime). Another source of confusion is primary constructors: “val” or “var” in a constructor declaration means something different from the same thing if a function declarations (namely, it creates a property). Also, we all know that mutating parameters is no good style, so writing “val” or “var” infront of a parameter in a function, catch block of for-loop is no longer allowed.
+      - 해석 : `val`이나 `var`를 파라미터에 붙이면 참조로 파라미터를 전달하는 것으로 오해할 수 있기 때문에 사용하지 않는다. 또한, 파라미터를 변경하는 것은 좋은 스타일이 아니기 때문에 `val`이나 `var`를 사용하지 않는다.
