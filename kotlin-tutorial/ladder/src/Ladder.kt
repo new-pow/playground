@@ -1,44 +1,68 @@
 package src
 
+import java.util.ArrayList
 import kotlin.random.Random
 
-data class Ladder(val layer: Int, val playerNumber: Int) {
+data class Ladder(val layer: Int, val players: Players) {
 
     // 2차원 Char 배열
     // 1. 행의 개수는 layer
     // 2. 열의 개수는 playerNumber
-    val ladder = Array(layer) { CharArray(playerNumber*2 + 1) }
+    val width = 2
+    val ladder = ArrayList<String>()
+
+    val BRIDGE = "-------"
+    val SPACE = "\t"
+    val WALL = "|"
 
     // ladder 초기화
     init {
         for (i in 0 until layer) { // until은 마지막을 포함하지 않는다.
-            // TODO : depth 1로 줄여보기
-            for (j in 0 until playerNumber*2 + 1) {
-                if (j % 2 == 0) {
-                    ladder[i][j] = '|'
-                } else {
-                    ladder[i][j] = generateStep()
-                }
-            }
+            ladder.add(generateLayer())
         }
     }
 
-    fun generateStep() : Char {
-        val random = Random.nextBoolean()
-        if (random) {
-            return '-'
+    private fun generateLayer() : String {
+        var layer = "\t"
+        var temp = ""
+        for (i in 0 until players.getSize()*width -1) {
+            if (i % width == 0) {
+                layer += WALL
+                continue
+            }
+            val generatePath = generatePath(temp)
+            layer += generatePath
+            temp = generatePath
         }
-        return ' '
+        return layer
+    }
+
+    private fun generatePath(temp : String) : String {
+        if (temp == BRIDGE) {
+            return SPACE
+        }
+        return generateStep()
+    }
+
+
+    private fun generateStep() : String {
+        if (Random.nextBoolean()) {
+            return BRIDGE
+        }
+        return SPACE
     }
 
     fun printLadder() {
-        //TODO : depth 1로 줄여보기
+        // print player name
+        players.printPlayers()
         for (i in 0 until layer) {
-            for (j in 0 until playerNumber*2 + 1) {
-                print(ladder[i][j])
-            }
-            println()
+            printLayer(i)
         }
+    }
+
+    private fun printLayer(i : Int) {
+        print(ladder.get(i))
+        println()
     }
 
 }
