@@ -26,7 +26,31 @@
 - [x] 코틀린에서 Collection을 어떻게 사용하지?
     - [x] [참고링크](https://kotlinlang.org/docs/collections-overview.html)
     - ![](https://kotlinlang.org/docs/images/collections-diagram.png)
-
+- [x] 코틀린에서 `List`와 `Array`의 차이는 무엇인가?
+    - [x] [참고링크](https://stackoverflow.com/questions/33727869/what-is-the-difference-between-array-and-list-in-kotlin)
+    - `List`는 `Array`와 달리 `size`를 가지고 있다.
+    - `List`는 `Array`와 달리 `get`을 사용하지 않고 `[]`를 사용한다.
+    - `List`는 `Array`와 달리 `set`을 사용하지 않고 `[]`를 사용한다.
+    - `List`는 `Array`와 달리 `add`를 사용하지 않고 `+`를 사용한다.
+    - `List`는 `Array`와 달리 `remove`를 사용하지 않고 `-`를 사용한다.
+    - `List`는 `Array`와 달리 `removeAt`을 사용하지 않고 `[]`를 사용한다.
+    - `List`는 `Array`와 달리 `removeAll`을 사용하지 않고 `[]`를 사용한다.
+    - `List`는 `Array`와 달리 `clear`를 사용하지 않고 `[]`를 사용한다.
+    - `List`는 `Array`와 달리 `contains`를 사용하지 않고 `in`을 사용한다.
+- [x] null safe
+    - [x] [참고링크](https://kotlinlang.org/docs/null-safety.html)
+    - [x] [참고링크 safe calls](https://kotlinlang.org/docs/null-safety.html#safe-calls)
+    - `?`,`!!`, `?.`, `?:` 등의 연산자를 사용한다.
+- [ ] 단위 테스트는 어떻게 해야하지?
+```kotlin
+class LadderTest {
+    @Test
+    fun `사다리_높이가_0이면_에러를_반환한다`() {
+        val ladder = Ladder(0, 5)
+        assertThat(ladder.height).isEqualTo(0)
+    }
+}
+```
 
 #### 1단계
 - [x] 패키지 단위로 build를 어떻게 하지?
@@ -34,6 +58,7 @@
 kotlinc YourFile.kt -include-runtime -d YourOutput.jar # 단일 파일 빌드
 kotlinc src -include-runtime -d YourOutput.jar # 프로젝트 빌드
 ```
+![](https://3553248446-files.gitbook.io/~/files/v0/b/gitbook-legacy-files/o/assets%2F-M5HOStxvx-Jr0fqZhyW%2F-MM0j1ZIMxf5jSpuWV-F%2F-MM0jIrie0U6EVQ38RQQ%2F01fig01_alt.jpg?alt=media&token=09784519-c4ec-4854-8728-9d0c50869cd0)
 
 - [x] kotlin에서 입력을 어떻게 받지?
 ```kotlin
