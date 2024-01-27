@@ -1,0 +1,3 @@
+module tiny-web-scraper
+
+go 1.21.6
