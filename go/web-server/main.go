@@ -21,6 +21,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen port %s: %v", p, err)
 	}
+	if err := run(context.Background(), l); err != nil {
+		log.Fatalf("failed to terminate server: %v", err)
+		os.Exit(1)
+	}
 }
 
 func run(ctx context.Context, l net.Listener) error {

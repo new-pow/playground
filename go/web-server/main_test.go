@@ -24,7 +24,7 @@ func TestRun(t *testing.T) {
 	})
 	in := "message"
 	// 어떤 포트 번호로 리슨하고 있는지 확인
-	url := fmt.Sprintf("http://%s%s", l.Addr().String(), in)
+	url := fmt.Sprintf("http://%s/%s", l.Addr().String(), in)
 	t.Logf("try request to %q", url)
 	rsp, err := http.Get(url)
 	if err != nil {
